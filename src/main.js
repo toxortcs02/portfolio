@@ -1,60 +1,162 @@
 import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
 
+// Converts a string-array pixel grid into an inline SVG
+function toSVG(rows, palette, px) {
+  const h = rows.length, w = rows[0].length
+  let rects = ''
+  for (let r = 0; r < h; r++) {
+    for (let c = 0; c < w; c++) {
+      const ch = rows[r][c]
+      if (ch === '.' || !palette[ch]) continue
+      rects += `<rect x="${c * px}" y="${r * px}" width="${px}" height="${px}" fill="${palette[ch]}"/>`
+    }
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w * px}" height="${h * px}" style="image-rendering:pixelated;display:block">${rects}</svg>`
+}
+
+
+// ── DATA ─────────────────────────────────────────────────────────────────
+const skills = [
+  { name: 'JavaScript', icon: '⚔️', level: 90, color: 'is-warning' },
+  { name: 'HTML / CSS',  icon: '🛡️', level: 85, color: 'is-success' },
+  { name: 'React',       icon: '🔮', level: 80, color: 'is-primary' },
+  { name: 'Node.js',     icon: '🌲', level: 75, color: 'is-success' },
+  { name: 'Git',         icon: '📜', level: 88, color: 'is-warning' },
+  { name: 'SQL',         icon: '🗝️', level: 70, color: 'is-primary' },
+]
+
+const projects = [
+  {
+    tag: 'Sistema de reservas de canchas de tenis',
+    title: 'Revés  de cancha',
+    desc: 'Sistema de  reserva de canchas de tenis.',
+    code: 'https://github.com/toxortcs02/canchas-app',
+  },
+  {
+    tag: 'ENCHANTMENT',
+    title: 'RUNE PALETTE',
+    desc: 'A color tome inspired by ancient runes. Forge palettes and export them as CSS scrolls.',
+    demo: '#', code: '#',
+  },
+  {
+    tag: 'BATTLE',
+    title: 'SIEGE ENGINE',
+    desc: 'Turn-based siege warfare in the browser — command trebuchets, knights, and archers.',
+    demo: '#', code: '#',
+  },
+  {
+    tag: 'GRIMOIRE',
+    title: 'QUEST LOG API',
+    desc: 'A RESTful tome of tasks. Earn XP, level up, and unlock legendary achievements.',
+    demo: '#', code: '#',
+  },
+]
+
+// ── RENDER ───────────────────────────────────────────────────────────────
 document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+<nav>
+  <span class="nav-logo">⚔ THE CODE KEEP<span class="blink">_</span></span>
+  <ul class="nav-links">
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#projects">QUESTS</a></li>
+    <li><a href="#about">LORE</a></li>
+    <li><a href="#contact">SUMMON</a></li>
+  </ul>
+</nav>
 
-<div class="ticks"></div>
+<section id="hero">
+  <div class="hero-sprites">
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
+    <div class="hero-center">
+      <h1 class="hero-title">TOMAS SABELLA<span class="blink">_</span></h1>
+      <p class="hero-subtitle">✦ BACKEND DEVELOPER ✦</p>
+      <p class="hero-desc">
+          Desarrollador Fullstack(Backend focus) con experiencia en 
+      </p>
+      <div class="cta-group">
+        <a href="#projects" class="nes-btn is-warning">⚔ VIEW QUESTS</a>
+        <a href="#contact"  class="nes-btn is-primary">✦ SUMMON ME</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<div class="ticks"></div>
-<section id="spacer"></section>
+<p class="divider">✦ · · · ⚔ · · · ✦</p>
+
+<section id="skills">
+  <h2 class="section-title">⚔ SKILLS OF THE REALM</h2>
+  <div class="skills-grid">
+    ${skills.map(s => `
+    <div class="nes-container skill-card">
+      <div class="skill-header"><span>${s.icon}</span><span>${s.name}</span></div>
+      <progress class="nes-progress ${s.color}" value="${s.level}" max="100"></progress>
+    </div>`).join('')}
+  </div>
+</section>
+
+<p class="divider">✦ · · · ⚔ · · · ✦</p>
+
+<section id="projects">
+  <h2 class="section-title">📜 THE QUEST BOARD</h2>
+  <div class="projects-grid">
+    ${projects.map(p => `
+    <div class="nes-container project-card">
+      <span class="project-badge">${p.tag}</span>
+      <h3 class="project-title">${p.title}</h3>
+      <p class="project-desc">${p.desc}</p>
+      <div class="project-links">
+        <a href="${p.demo}" class="nes-btn is-warning" style="font-size:9px;padding:8px 12px">▶ DEMO</a>
+        <a href="${p.code}" class="nes-btn"            style="font-size:9px;padding:8px 12px">{ CODE }</a>
+      </div>
+    </div>`).join('')}
+  </div>
+</section>
+
+<p class="divider">✦ · · · ⚔ · · · ✦</p>
+
+<section id="about">
+  <h2 class="section-title">📖 THE LORE</h2>
+  <div class="about-grid">
+    <div class="nes-container" style="padding:28px">
+      <p class="about-text">
+        En los días previos a los plazos de entrega, un joven aprendiz descubrió las artes arcanas
+        de la programación a través de mundos pixelados y melodías orientales. <br><br>
+        Ahora, convertido en un experimentado caballero del código, maneja Java y python como dos dagas mortales   y
+        despliega contenedores con la precisión de un comandante de asedio.<br><br>
+        Cuando no está defendiendo el reino de la deuda técnica, se le puede encontrar
+        iluminando manuscritos (redactando documentación) o formando a jóvenes escuderos.
+      </p>
+    </div>
+    <div class="nes-container" style="padding:28px">
+      <table class="stat-table">
+        <tr><td>⚔ CLASS</td>       <td>Full-Stack developer</td></tr>
+        <tr><td>XP</td> <td>2 Años</td></tr>
+        <tr><td>🔮 SPELLS</td>     <td>JAVA/PYTHON/C#</td></tr>
+        <tr><td>🛡 GREMIO</td>      <td>Bancario</td></tr>
+        <tr><td>✦ STATUS</td>      <td style="color:#4a8c42">AVAILABLE ✔</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<p class="divider">✦ · · · ⚔ · · · ✦</p>
+
+<section id="contact">
+  <h2 class="section-title" style="justify-content:center;text-align:center">CONTACT</h2>
+  <div class="nes-container contact-box">
+    <p>Dost thou seek a valiant developer for thine next great endeavour?<br>
+       Dispatch a raven and I shall ride forth post-haste.</p>
+    <div class="contact-links">
+      <a href="https://github.com/toxortcs02"     target="_blank" class="nes-btn">GITHUB</a>
+      <a href="https://www.linkedin.com/in/tomas-sabella/"    target="_blank" class="nes-btn is-primary">LINKEDIN</a>
+      <a href="mailto:tomassabella@hotmail.com"                 class="nes-btn is-error">✉ MAIL</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 THE CODE KEEP &nbsp;⚔&nbsp; FORGED WITH <span>♥</span> AND MEAD</p>
+  <p>MAY YOUR BUILDS NEVER FAIL<span class="blink">_</span></p>
+</footer>
 `
-
-setupCounter(document.querySelector('#counter'))
