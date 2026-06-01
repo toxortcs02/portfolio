@@ -312,7 +312,7 @@ footer span { color: var(--gold); }
 /* containers get stone/parchment feel */
 .nes-container {
   border-color: var(--gold) !important;
-  background-color: #1e160a !important;
+  background-color: #4d3a1f !important;
   color: var(--parchment) !important;
 }
 
@@ -339,6 +339,7 @@ footer span { color: var(--gold); }
 .nes-btn {
   font-family: 'Press Start 2P', monospace !important;
   color: var(--dark) !important;
+  border-color: var(--brown) !important;
 }
 
 .nes-btn.is-success {
@@ -357,6 +358,28 @@ footer span { color: var(--gold); }
   background-color: var(--brown-lt) !important;
   border-color: var(--brown) !important;
   color: var(--parchment) !important;
+  box-shadow: inset -4px -4px var(--brown) !important;
+}
+.nes-btn.is-primary:hover {
+  background-color: var(--brown-lt) !important;
+  border-color: var(--brown) !important;
+  color: var(--parchment) !important;
+}
+.nes-btn.is-primary::after {
+  box-shadow: inset -4px -4px var(--brown) !important;
+}
+
+.nes-btn.is-primary:hover::after {
+  box-shadow: inset -6px -6px var(--brown) !important;
+}
+
+.nes-btn.is-primary:active:not(.is-disabled)::after {
+  box-shadow: inset 4px 4px var(--brown) !important;
+}
+
+/* Glow azul al hacer focus */
+.nes-btn.is-primary:focus {
+  box-shadow: 0 0 0 6px rgba(91, 61, 30, 0.4) !important;
 }
 
 .nes-btn.is-error {

@@ -17,39 +17,40 @@ function toSVG(rows, palette, px) {
 
 // ── DATA ─────────────────────────────────────────────────────────────────
 const skills = [
-  { name: 'JavaScript', icon: '⚔️', level: 90, color: 'is-warning' },
-  { name: 'HTML / CSS',  icon: '🛡️', level: 85, color: 'is-success' },
-  { name: 'React',       icon: '🔮', level: 80, color: 'is-primary' },
-  { name: 'Node.js',     icon: '🌲', level: 75, color: 'is-success' },
-  { name: 'Git',         icon: '📜', level: 88, color: 'is-warning' },
-  { name: 'SQL',         icon: '🗝️', level: 70, color: 'is-primary' },
+  { name: 'Python', icon: '⚔️', level: 80, color: 'is-warning' },
+  { name: 'Java',  icon: '🛡️', level: 90, color: 'is-success' },
+  { name: 'Git/GitHub',         icon: '📜', level: 90, color: 'is-warning' },
+  { name: 'React',       icon: '🔮', level: 70, color: 'is-primary' },
+  { name: 'Node.js',         icon: '📜', level: 80, color: 'is-warning' },
+  { name: 'Spring',     icon: '🌲', level: 75, color: 'is-success' },
+  { name: 'SQL',         icon: '🗝️', level: 75, color: 'is-primary' },
+  { name: 'LangChain',         icon: '🧙', level: 50, color: 'is-primary' },
+  { name: 'Docker/Kubernetes', icon: '⚓', level: 60, color: 'is-success' },
 ]
 
 const projects = [
   {
-    tag: 'Sistema de reservas de canchas de tenis',
-    title: 'Revés  de cancha',
-    desc: 'Sistema de  reserva de canchas de tenis.',
+    tag: 'Tennis Court Reservation System',
+    title: 'Backhand Booking ',
+    stack: '[Full-Stack]',
+    desc: 'Tennis Court Reservation System developed with PHP, MySQL and React. ',
     code: 'https://github.com/toxortcs02/canchas-app',
   },
   {
     tag: 'ENCHANTMENT',
     title: 'RUNE PALETTE',
+    stack: '[Full-Stack]',
     desc: 'A color tome inspired by ancient runes. Forge palettes and export them as CSS scrolls.',
     demo: '#', code: '#',
   },
   {
     tag: 'BATTLE',
     title: 'SIEGE ENGINE',
+    stack: '[Full-Stack]',
     desc: 'Turn-based siege warfare in the browser — command trebuchets, knights, and archers.',
     demo: '#', code: '#',
   },
-  {
-    tag: 'GRIMOIRE',
-    title: 'QUEST LOG API',
-    desc: 'A RESTful tome of tasks. Earn XP, level up, and unlock legendary achievements.',
-    demo: '#', code: '#',
-  },
+
 ]
 
 // ── RENDER ───────────────────────────────────────────────────────────────
@@ -71,8 +72,7 @@ document.querySelector('#app').innerHTML = `
       <h1 class="hero-title">TOMAS SABELLA<span class="blink">_</span></h1>
       <p class="hero-subtitle">✦ BACKEND DEVELOPER ✦</p>
       <p class="hero-desc">
-          Desarrollador Fullstack(Backend focus) con experiencia en 
-      </p>
+Full-stack developer with a focus on backend development, specializing in Python, Java, Spring, and microservices in high-demand banking environments. Interested in integrating AI into real-world systems and building scalable solutions.      </p>
       <div class="cta-group">
         <a href="#projects" class="nes-btn is-warning">⚔ VIEW QUESTS</a>
         <a href="#contact"  class="nes-btn is-primary">✦ SUMMON ME</a>
@@ -104,6 +104,7 @@ document.querySelector('#app').innerHTML = `
     <div class="nes-container project-card">
       <span class="project-badge">${p.tag}</span>
       <h3 class="project-title">${p.title}</h3>
+      <h3 class="project-title">${p.stack}</h3>
       <p class="project-desc">${p.desc}</p>
       <div class="project-links">
         <a href="${p.demo}" class="nes-btn is-warning" style="font-size:9px;padding:8px 12px">▶ DEMO</a>
@@ -133,7 +134,7 @@ document.querySelector('#app').innerHTML = `
         <tr><td>⚔ CLASS</td>       <td>Full-Stack developer</td></tr>
         <tr><td>XP</td> <td>2 Años</td></tr>
         <tr><td>🔮 SPELLS</td>     <td>JAVA/PYTHON/C#</td></tr>
-        <tr><td>🛡 GREMIO</td>      <td>Bancario</td></tr>
+        <tr><td>🛡 GREMIO</td>      <td>Programador</td></tr>
         <tr><td>✦ STATUS</td>      <td style="color:#4a8c42">AVAILABLE ✔</td></tr>
       </table>
     </div>
@@ -150,7 +151,7 @@ document.querySelector('#app').innerHTML = `
     <div class="contact-links">
       <a href="https://github.com/toxortcs02"     target="_blank" class="nes-btn">GITHUB</a>
       <a href="https://www.linkedin.com/in/tomas-sabella/"    target="_blank" class="nes-btn is-primary">LINKEDIN</a>
-      <a href="mailto:tomassabella@hotmail.com"                 class="nes-btn is-error">✉ MAIL</a>
+      <button id="mail-btn" class="nes-btn is-error">✉ MAIL</button>
     </div>
   </div>
 </section>
@@ -160,3 +161,9 @@ document.querySelector('#app').innerHTML = `
   <p>MAY YOUR BUILDS NEVER FAIL<span class="blink">_</span></p>
 </footer>
 `
+document.getElementById('mail-btn').addEventListener('click', () => {
+  navigator.clipboard.writeText('tomassabella@hotmail.com')
+  const btn = document.getElementById('mail-btn')
+  btn.textContent = '✔ COPIADO!'
+  setTimeout(() => { btn.textContent = '✉ MAIL' }, 2000)
+})
