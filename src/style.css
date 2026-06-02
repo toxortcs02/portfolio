@@ -341,7 +341,21 @@ footer span { color: var(--gold); }
   color: var(--dark) !important;
   border-color: var(--brown) !important;
 }
+.nes-btn:not([class*="is-"])::after {
+  box-shadow: inset -4px -4px rgba(3, 3, 3, 0.3) !important;
+}
 
+.nes-btn:not([class*="is-"]):hover::after {
+  box-shadow: inset -6px -6px rgba(15, 15, 15, 0.3) !important;
+}
+
+.nes-btn:not([class*="is-"]):active:not(.is-disabled)::after {
+  box-shadow: inset 4px 4px rgba(15, 15, 15, 0.3) !important;
+}
+
+.nes-btn:not([class*="is-"]):focus {
+  box-shadow: 0 0 0 6px rgba(32, 29, 21, 0.3) !important;
+}
 .nes-btn.is-success {
   background-color: var(--green-lt) !important;
   border-color: var(--green) !important;
